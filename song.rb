@@ -1,8 +1,8 @@
 class Song
 
-attr_reader :name
+attr_reader :song_title
 
-  def initialize(name)
-    @name = name
+  def initialize(song_title)
+    @song_title = song_title
   end
 end
