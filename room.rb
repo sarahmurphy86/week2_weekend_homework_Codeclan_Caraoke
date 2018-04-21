@@ -1,26 +1,34 @@
 class Room
 
-attr_reader :room_name, :capacity
-attr_accessor :songs, :amount_of_guests
+attr_reader :room_name, :capacity, :songs, :guest_list
 
-  def initialize(room_name, capacity, amount_of_guests, songs)
+# attr_accessor :guest_list
+
+  def initialize(room_name, capacity, guest_list, songs)
     @room_name = room_name
     @capacity = capacity
-    @amount_of_guests = amount_of_guests
+    @guest_list = guest_list
     @songs = songs
   end
 
-  def add_a_guest(guest)
-    amount_of_guests.push(guest)
-  end
+  # def add_a_guest(guest)
+  #    guest_list.push(guest)
+  # end
 
   def remove_a_guest
-    amount_of_guests.pop
+    guest_list.pop
   end
 
   def add_a_song(song)
     songs.push(song)
   end
 
+  def add_a_guest(guest)
+     if capacity > guest_list().count
+       guest_list.push(guest)
+     else
+       p "Sorry no space in #{@room_name}"
+     end
+  end
 
 end

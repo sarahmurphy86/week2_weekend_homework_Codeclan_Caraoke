@@ -7,20 +7,20 @@ require_relative("../guest")
 class TestRoom < MiniTest::Test
 
   def setup
-    @song1 = Song.new("Mama Mia")
-    @song2 = Song.new("Dancing Queen")
-    @song3 = Song.new("Waterloo")
-    @song4 = Song.new("Money Money Money")
+    @song1 = Song.new("Mama Mia", "Abba")
+    @song2 = Song.new("Dancing Queen", "Abba")
+    @song3 = Song.new("Waterloo", "Abba")
+    @song4 = Song.new("Money Money Money", "Abba")
     songs = [@song1, @song2, @song3]
 
+    @guest1 = Guest.new("Beyonce")
+    @guest2 = Guest.new("Kylie")
+    @guest3 = Guest.new("Madonna")
+    @guest4 = Guest.new("Dolly")
+    guest_list = [@guest1, @guest2, @guest3]
 
-    @guest1 = Guest.new("Amanda")
-    @guest2 = Guest.new("Carol")
-    @guest3 = Guest.new("Sandra")
-    @guest4 = Guest.new("Sally")
-    people = [@guest1, @guest2, @guest3]
-    @room = Room.new("Vegas", 10, people, songs)
-
+    @room = Room.new("Vegas", 10, guest_list, songs)
+    @room1 = Room.new("Blackpool", 3, guest_list, songs)
   end
 
   def test_room_name
@@ -32,26 +32,35 @@ class TestRoom < MiniTest::Test
   end
 
   def test_room_has_songs
-    assert_equal(3, @room.songs().length)
+    assert_equal(3, @room.songs().count)
   end
 
-  def test_room_amount_of_guests
-    assert_equal(3, @room.amount_of_guests().length)
+  def test_room_guest_list
+    assert_equal(3, @room.guest_list().count)
   end
 
   def test_add_a_guest
     @room.add_a_guest(@guest4)
-    assert_equal(4, @room.amount_of_guests().length)
+    assert_equal(4, @room.guest_list().count)
   end
 
   def test_remove_a_guest
     @room.remove_a_guest
-    assert_equal(2, @room.amount_of_guests().length)
+    assert_equal(2, @room.guest_list().count)
   end
 
   def test_add_song_to_room
     @room.add_a_song(@song4)
-    assert_equal(4,@room.songs().length)
+    assert_equal(4,@room.songs().count)
   end
+
+# What happens if there are more guests trying to be checked in than there is free space in the room?
+
+  def test_add_guest_to_full_room
+    @room1.add_a_guest(@guest4)
+    assert_equal(@room1.capacity, @room1.guest_list().count)
+  end
+
+
 
 end
