@@ -13,14 +13,14 @@ class TestRoom < MiniTest::Test
     @song4 = Song.new("Money Money Money", "Abba")
     songs = [@song1, @song2, @song3]
 
-    @guest1 = Guest.new("Beyonce")
-    @guest2 = Guest.new("Kylie")
-    @guest3 = Guest.new("Madonna")
-    @guest4 = Guest.new("Dolly")
+    @guest1 = Guest.new("Beyonce", 100)
+    @guest2 = Guest.new("Kylie", 50)
+    @guest3 = Guest.new("Madonna", 25)
+    @guest4 = Guest.new("Dolly", 150)
     guest_list = [@guest1, @guest2, @guest3]
 
-    @room = Room.new("Vegas", 10, guest_list, songs)
-    @room1 = Room.new("Blackpool", 3, guest_list, songs)
+    @room = Room.new("Vegas", 10, guest_list, songs, 20, 0)
+    @room1 = Room.new("Blackpool", 3, guest_list, songs, 6, 0)
   end
 
   def test_room_name
@@ -61,6 +61,26 @@ class TestRoom < MiniTest::Test
     assert_equal(@room1.capacity, @room1.guest_list().count)
   end
 
+# Karaoke venues usually have an entry fee - So the guests could have money so they can pay it.
+  def test_entry_fee
+    assert_equal(6, @room1.entry_fee)
+  end
 
+  def test_empty_till
+    assert_equal(0, @room1.till)
+  end
+
+  # def test_till_increases
+  #   @room.till_increases(@room.entry_fee)
+  #   assert_equal(20, @room.till)
+  # end
+  
+  # I added this in as I wanted to see if I could add 20 to an empty till - the method is method_4 in room.rb
+
+  def test_till_increases
+    @room.till_increases(@guest1, @room)
+    assert_equal(80, @guest1.guest_money)
+    assert_equal(20, @room.till)
+  end
 
 end

@@ -1,14 +1,16 @@
 class Room
 
-attr_reader :room_name, :capacity, :songs, :guest_list
+attr_reader :room_name, :capacity, :songs, :guest_list, :entry_fee, :till
 
 # attr_accessor :guest_list
 
-  def initialize(room_name, capacity, guest_list, songs)
+  def initialize(room_name, capacity, guest_list, songs, entry_fee, till)
     @room_name = room_name
     @capacity = capacity
     @guest_list = guest_list
     @songs = songs
+    @entry_fee = entry_fee
+    @till = till
   end
 
   # def add_a_guest(guest)
@@ -29,6 +31,17 @@ attr_reader :room_name, :capacity, :songs, :guest_list
      else
        p "Sorry no space in #{@room_name}"
      end
+  end
+
+  # def till_increases(entry_fee)
+  #   @till += entry_fee
+  # end
+# I have commented this out (method_4) as it is no longer needed.
+# **ask why @till and not till?**
+
+  def till_increases(guest,room)
+    guest.pay_for_room(room)
+    @till += entry_fee
   end
 
 end
