@@ -2,12 +2,11 @@ require("minitest/autorun")
 require("minitest/rg")
 require_relative("../guest")
 require_relative("../room")
-require_relative("../song")
+
 
 class TestGuest < MiniTest::Test
   def setup
     @guest = Guest.new("Beyonce", 100)
-    @song = Song.new("Mama Mia", "Abba")
     @room = Room.new("Vegas", 10, @guest, @song, 20, 0)
   end
 
