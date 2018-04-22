@@ -2,8 +2,6 @@ class Room
 
 attr_reader :room_name, :capacity, :songs, :guest_list, :entry_fee, :till
 
-# attr_accessor :guest_list
-
   def initialize(room_name, capacity, guest_list, songs, entry_fee, till)
     @room_name = room_name
     @capacity = capacity
@@ -26,7 +24,7 @@ attr_reader :room_name, :capacity, :songs, :guest_list, :entry_fee, :till
   end
 
   def add_a_guest(guest)
-     if capacity > guest_list().count
+     if capacity > guest_list.count()
        guest_list.push(guest)
      else
        p "Sorry no space in #{@room_name}"

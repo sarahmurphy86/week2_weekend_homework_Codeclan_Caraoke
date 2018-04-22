@@ -32,33 +32,33 @@ class TestRoom < MiniTest::Test
   end
 
   def test_room_has_songs
-    assert_equal(3, @room.songs().count)
+    assert_equal(3, @room.songs.count())
   end
 
   def test_room_guest_list
-    assert_equal(3, @room.guest_list().count)
+    assert_equal(3, @room.guest_list.count())
   end
 
   def test_add_a_guest
     @room.add_a_guest(@guest4)
-    assert_equal(4, @room.guest_list().count)
+    assert_equal(4, @room.guest_list.count())
   end
 
   def test_remove_a_guest
     @room.remove_a_guest
-    assert_equal(2, @room.guest_list().count)
+    assert_equal(2, @room.guest_list.count())
   end
 
   def test_add_song_to_room
     @room.add_a_song(@song4)
-    assert_equal(4,@room.songs().count)
+    assert_equal(4,@room.songs.count())
   end
 
 # What happens if there are more guests trying to be checked in than there is free space in the room?
 
   def test_add_guest_to_full_room
     @room1.add_a_guest(@guest4)
-    assert_equal(@room1.capacity, @room1.guest_list().count)
+    assert_equal(@room1.capacity, @room1.guest_list.count())
   end
 
 # Karaoke venues usually have an entry fee - So the guests could have money so they can pay it.
@@ -74,7 +74,7 @@ class TestRoom < MiniTest::Test
   #   @room.till_increases(@room.entry_fee)
   #   assert_equal(20, @room.till)
   # end
-  
+
   # I added this in as I wanted to see if I could add 20 to an empty till - the method is method_4 in room.rb
 
   def test_till_increases
